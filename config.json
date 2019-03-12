@@ -1,0 +1,6 @@
+{
+  "AccessKeyId": "your accesskey",
+  "Signature": "your signatrue",
+  "DomainName": "example.com",
+  "RR": "www"
+}
