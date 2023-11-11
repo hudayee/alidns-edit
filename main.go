@@ -15,7 +15,6 @@ import (
 	"net/url"
 	"os"
 	"reflect"
-	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -28,18 +27,13 @@ var listQuery _type.ListQuery
 var r *rand.Rand
 
 func getIP() (string, error) {
-	res, err := http.Get("http://2018.ip138.com/ic.asp")
-	if err != nil {
+	res, err := http.Get("https://4.ipw.cn/")
+	if err != nil || res.StatusCode != 200 {
 		return "", errors.New("获取IP错误!")
 	}
-	html, _ := ioutil.ReadAll(res.Body)
-	reg := regexp.MustCompile(`\[([\d\.]+)\]`)
-	reg.Longest()
-	result := reg.FindSubmatch(html)
-	if len(result) != 2 {
-		return "", errors.New("获取IP错误!")
-	}
-	return string(result[1]), nil
+	ip, _ := ioutil.ReadAll(res.Body)
+
+	return string(ip), nil
 }
 
 func getConfig() (_type.Config, error) {
