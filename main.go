@@ -37,7 +37,11 @@ func getIP() (string, error) {
 }
 
 func getConfig() (_type.Config, error) {
-	file, err := ioutil.ReadFile("config.json")
+	filePath := "./config.json"
+	if len(os.Args) > 1 {
+		filePath = os.Args[1]
+	}
+	file, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		return _type.Config{}, err
 	}
